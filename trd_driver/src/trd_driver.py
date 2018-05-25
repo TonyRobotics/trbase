@@ -106,9 +106,9 @@ class TrdSerial(threading.Thread):
                 self._first_time_flag = False
             self._encoders[0] -= self._encoders_offset[0]
             self._encoders[1] -= self._encoders_offset[1]
-            print('{} encoders: {}, voltage: {}V, currents: {}A, {}A. send:{} {}, actual:{} {}'.format(
-                        time.time(), self._encoders, self._voltage, self._currents[0], self._currents[1],
-                        ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
+            #print('{} encoders: {}, voltage: {}V, currents: {}A, {}A. send:{} {}, actual:{} {}'.format(
+            #            time.time(), self._encoders, self._voltage, self._currents[0], self._currents[1],
+            #            ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
         else:
             print('{} received message: {}'.format(time.time(), msg))
 
