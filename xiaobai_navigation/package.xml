@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>xiaobai_navigation</name>
+  <version>0.0.1</version>
+  <description>The xiaobai_navigation package</description>
+
+  <maintainer email="jeff.gao@tonyrobotics.com">Jeff Gao</maintainer>
+  <author email="jeff.gao@tonyrobotics.com">Jeff Gao</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>

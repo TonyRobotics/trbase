@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- TR05 -->
+  <arg name="serialport_name" default="/dev/motor_trd" />
+  <arg name="baudrate" default="38400"/>
+  <arg name="left_coef" default="1.0" />
+  <arg name="right_coef" default="1.0" />
+  <arg name="linear_coef" default="180.0" />
+  <arg name="angular_coef" default="-24" />
+  <arg name="encoder_ticks_per_rev" default="2200" />
+  <arg name="base_width" default="0.25" />
+  <arg name="wheel_diameter" default="0.08" />
+
+  <!-- TR10 -->
+  <!--
+  <arg name="serialport_name" default="/dev/motor_trd" />
+  <arg name="baudrate" default="38400"/>
+  <arg name="left_coef" default="-1.0" />
+  <arg name="right_coef" default="1.0" />
+  <arg name="linear_coef" default="82.0" />
+  <arg name="angular_coef" default="14.64" />
+  <arg name="encoder_ticks_per_rev" default="1600" />
+  <arg name="base_width" default="0.39" />
+  <arg name="wheel_diameter" default="0.125" />
+  -->
+
+  <!-- TR30 -->
+  <!--
+  <arg name="serialport_name" default="/dev/motor_trd" />
+  <arg name="baudrate" default="38400"/>
+  <arg name="left_coef" default="1.0" />
+  <arg name="right_coef" default="1.0" />
+  <arg name="linear_coef" default="166.4" />
+  <arg name="angular_coef" default="28.2" />
+  <arg name="encoder_ticks_per_rev" default="3136" />
+  <arg name="base_width" default="0.34" />
+  <arg name="wheel_diameter" default="0.125" />
+  -->
+
+  <!-- XiaoBai -->
+  <!--
+  <arg name="serialport_name" default="/dev/motor_trd" />
+  <arg name="baudrate" default="38400"/>
+  <arg name="left_coef" default="1.0" />
+  <arg name="right_coef" default="1.0" />
+  <arg name="linear_coef" default="320.0" />
+  <arg name="angular_coef" default="60.0" />
+  <arg name="encoder_ticks_per_rev" default="996" />
+  <arg name="base_width" default="0.39" />
+  <arg name="wheel_diameter" default="0.125" />
+  -->
+
+  <node pkg="trd_driver" type="trd_driver.py" name="trd_driver_node">
+    <param name="serialport_name" value="$(arg serialport_name)" />
+    <param name="baudrate" value="$(arg baudrate)" />
+    <param name="left_coef" value="$(arg left_coef)" />
+    <param name="right_coef" value="$(arg right_coef)" />
+    <param name="linear_coef" value="$(arg linear_coef)" />
+    <param name="angular_coef" value="$(arg angular_coef)" />
+    <param name="encoder_ticks_per_rev" value="$(arg encoder_ticks_per_rev)" />
+    <param name="base_width" value="$(arg base_width)" />
+    <param name="wheel_diameter" value="$(arg wheel_diameter)" />
+  </node>
+</launch>
+

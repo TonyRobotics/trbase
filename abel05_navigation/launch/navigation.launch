@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="false" />
+
+    <!-- motor driver -->
+    <include file="$(find abel05_navigation)/launch/controller.launch" />
+
+    <!-- ls01d laser -->
+    <include file="$(find ls01d)/launch/ls01d.launch" />
+
+    <!-- map_server -->
+    <node pkg="map_server" type="map_server" name="map_server"
+          args="$(find abel05_navigation)/maps/map.yaml" />
+
+    <!-- amcl localization -->
+    <node pkg="amcl" type="amcl" name="amcl" />
+
+    <!-- move_base -->
+    <include file="$(find abel05_navigation)/launch/move_base.launch" />
+
+</launch>

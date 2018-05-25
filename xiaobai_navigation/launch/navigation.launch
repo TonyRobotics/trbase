@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="false" />
+
+    <!-- motor driver -->
+    <include file="$(find xiaobai_navigation)/launch/controller.launch" />
+
+    <!-- hokuyo laser -->
+    <include pkg="urg_node" type="urg_node" name="urg_node"
+            args="_ip_address:=192.168.0.10 _angle_max:=0.8 _angle_min:=-0.8" />
+
+    <!-- map_server -->
+    <node pkg="map_server" type="map_server" name="map_server"
+          args="$(find xiaobai_navigation)/maps/map.yaml" />
+
+    <!-- amcl localization -->
+    <node pkg="amcl" type="amcl" name="amcl" />
+
+    <!-- move_base -->
+    <include file="$(find xiaobai_navigation)/launch/move_base.launch" />
+
+</launch>
