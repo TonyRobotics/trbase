@@ -139,7 +139,7 @@ class TrdSerial(threading.Thread):
 class RosWraperTrd():
 
     def __init__(self, node_name):
-        rospy.init_node(node_name)
+        rospy.init_node(node_name,disable_signals=True)
         self.serialport_name = rospy.get_param('~serialport_name', \
                                                default='/dev/motor_trd')
         self.baudrate = rospy.get_param('~baudrate', default=38400)
