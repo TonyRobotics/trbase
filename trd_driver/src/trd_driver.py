@@ -51,6 +51,7 @@ class TrdSerial(threading.Thread):
                     in_msg_flag = False
                     msg[:] = []
                     print('Overflow message: {}, discarded!'.format(msg))
+                    continue
                 msg.append(r)
                 if len(msg)==2:
                     msg_len = ord(r)
@@ -62,6 +63,7 @@ class TrdSerial(threading.Thread):
                     else:
                         print('Invalid message: {}, discarded!'.format(msg))
             elif r=='\xea':
+                msg[:] = []
                 msg.append(r)
                 in_msg_flag = True
 
@@ -91,10 +93,10 @@ class TrdSerial(threading.Thread):
     def update(self, msg):
         #print('{} received message: {}'.format(time.time(), [hex(ord(m)) for m in msg]))
         if len(msg) < 4:
-            print('Msg length < 4 : {}', len(msg))
+            print('Msg length < 4 : {}'.format(len(msg)))
         if ord(msg[2]) == 0x7e:
             if len(msg) != 23:
-                print('Msg length = {} not correct, expected: 23', len(msg))
+                print('Msg length = {} not correct, expected: 23'.format(len(msg)))
             self._voltage = 0.2157*ord(msg[3])
             self._currents = [0.0272*ord(msg[4]), 0.0272*ord(msg[5])]
             self._error_code = ord(msg[6])
