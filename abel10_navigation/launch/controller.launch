@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- motor driver abel10 -->
+    <include file="$(find trd_driver)/launch/trd_driver.launch">
+        <arg name="serialport_name" value="/dev/motor_trd" />
+        <arg name="baudrate" value="38400"/>
+        <arg name="left_coef" value="-1.0" />
+        <arg name="right_coef" value="-1.0" />
+        <arg name="linear_coef" value="98.0" />
+        <arg name="angular_coef" value="19.5" />
+        <arg name="encoder_ticks_per_rev" value="2400" />
+        <arg name="base_width" value="0.39" />
+        <arg name="wheel_diameter" value="0.125" />
+    </include>
+</launch>
+

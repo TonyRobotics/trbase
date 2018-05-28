@@ -2,26 +2,17 @@
 <launch>
   <!-- TR05 -->
   <arg name="serialport_name" default="/dev/motor_trd" />
-  <arg name="baudrate" default="38400"/>
-  <arg name="left_coef" default="1.0" />
-  <arg name="right_coef" default="1.0" />
-  <arg name="linear_coef" default="180.0" />
-  <arg name="angular_coef" default="-24" />
-  <arg name="encoder_ticks_per_rev" default="2200" />
+  <arg name="baudrate" default="38400" />
+  <arg name="left_coef" default="-1.0" />
+  <arg name="right_coef" default="-1.0" />
+  <arg name="linear_coef" default="211.0" />
+  <arg name="angular_coef" default="27" />
+  <arg name="encoder_ticks_per_rev" default="3300" />
   <arg name="base_width" default="0.25" />
   <arg name="wheel_diameter" default="0.08" />
 
   <!-- TR10 -->
   <!--
-  <arg name="serialport_name" default="/dev/motor_trd" />
-  <arg name="baudrate" default="38400"/>
-  <arg name="left_coef" default="-1.0" />
-  <arg name="right_coef" default="1.0" />
-  <arg name="linear_coef" default="82.0" />
-  <arg name="angular_coef" default="14.64" />
-  <arg name="encoder_ticks_per_rev" default="1600" />
-  <arg name="base_width" default="0.39" />
-  <arg name="wheel_diameter" default="0.125" />
   -->
 
   <!-- TR30 -->
@@ -40,11 +31,11 @@
   <!-- XiaoBai -->
   <!--
   <arg name="serialport_name" default="/dev/motor_trd" />
-  <arg name="baudrate" default="38400"/>
+  <arg name="baudrate" default="38400" />
   <arg name="left_coef" default="1.0" />
   <arg name="right_coef" default="1.0" />
-  <arg name="linear_coef" default="320.0" />
-  <arg name="angular_coef" default="60.0" />
+  <arg name="linear_coef" default="42.0" />
+  <arg name="angular_coef" default="8.0" />
   <arg name="encoder_ticks_per_rev" default="996" />
   <arg name="base_width" default="0.39" />
   <arg name="wheel_diameter" default="0.125" />

@@ -100,6 +100,8 @@ class TrdSerial(threading.Thread):
             self._voltage = 0.2157*ord(msg[3])
             self._currents = [0.0272*ord(msg[4]), 0.0272*ord(msg[5])]
             self._error_code = ord(msg[6])
+            if self._error_code != 0:
+                print('trd_driver Error! error code({})'.format(self._error_code))
             self._encoders[0], = struct.unpack('>i', bytearray(msg[11:15]))
             self._encoders[1], = struct.unpack('>i', bytearray(msg[15:19]))
             if self._first_time_flag:
@@ -108,9 +110,9 @@ class TrdSerial(threading.Thread):
                 self._first_time_flag = False
             self._encoders[0] -= self._encoders_offset[0]
             self._encoders[1] -= self._encoders_offset[1]
-            #print('{} encoders: {}, voltage: {}V, currents: {}A, {}A. send:{} {}, actual:{} {}'.format(
-            #            time.time(), self._encoders, self._voltage, self._currents[0], self._currents[1],
-            #            ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
+            print('{} error:{} encoders: {}, {}V {}A {}A. set:{} {}, actual:{} {}'.format(
+                        time.time(), self._error_code, self._encoders, self._voltage, self._currents[0], self._currents[1],
+                        ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
         else:
             print('{} received message: {}'.format(time.time(), msg))
 
