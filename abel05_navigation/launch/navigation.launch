@@ -6,12 +6,14 @@
     <include file="$(find abel05_navigation)/launch/controller.launch" />
 
     <!-- ls01d laser -->
-    <node pkg="tf" type="static_transform_publisher" name="laser_link_broadcaster" args="-0.13 0 0.2 0 0 0 base_link laser_link 100" /> 
+    <node pkg="tf" type="static_transform_publisher" name="laser_link_broadcaster" args="0.1 0 0.2 3.14 0 0 base_link laser_link 100" /> 
     <include file="$(find ls01d)/launch/ls01d.launch" />
 
     <!-- map_server -->
+    <!-- 
     <node pkg="map_server" type="map_server" name="map_server"
           args="$(find abel05_navigation)/maps/map.yaml" />
+    -->
 
     <!-- amcl localization -->
     <node pkg="amcl" type="amcl" name="amcl" />
