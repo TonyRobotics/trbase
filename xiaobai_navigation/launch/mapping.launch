@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="base_frame"  default="base_link"/>
+    <arg name="odom_frame"  default="odom"/>
     <param name="use_sim_time" value="false" />
 
     <!-- motor driver -->
@@ -7,12 +9,27 @@
 
     <!-- hokuyo laser -->
     <node pkg="tf" type="static_transform_publisher" name="tf_baselink2laser"
-	  args="0.08 0 0 0 0 0 /base_link /laser 100" />
+	  args="0.08 0 0.1 0 0 0 /base_link /laser 100" />
     <node pkg="urg_node" type="urg_node" name="urg_node"
             args="_ip_address:=192.168.0.10 _angle_max:=0.8 _angle_min:=-0.8" />
 
     <!-- mapping -->
-    <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" />
+    <!-- <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" /> -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" >
+	<param name="base_frame" value="$(arg base_frame)" />
+        <param name="odom_frame" value="$(arg odom_frame)"/>
+        <param name="map_update_interval" value="5.0"/>
+        <param name="maxUrange" value="8.0"/>
+        <param name="minimumScore" value="50"/>
+        <param name="linearUpdate" value="0.3"/>
+        <param name="angularUpdate" value="0.4"/>
+        <param name="temporalUpdate" value="3.0"/>
+        <param name="xmin" value="-5.0"/>
+        <param name="ymin" value="-5.0"/>
+        <param name="xmax" value="5.0"/>
+        <param name="ymax" value="5.0"/>
+        <param name="delta" value="0.05"/>
+    </node>
 
     <!-- move_base -->
     <include file="$(find xiaobai_navigation)/launch/move_base.launch" />
