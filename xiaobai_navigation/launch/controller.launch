@@ -4,8 +4,8 @@
     <include file="$(find trd_driver)/launch/trd_driver.launch">
         <arg name="serialport_name" value="/dev/motor_trd" />
         <arg name="baudrate" value="38400" />
-        <arg name="left_coef" value="1.0" />
-        <arg name="right_coef" value="1.0" />
+        <arg name="left_coef" value="0.7" />
+        <arg name="right_coef" value="0.7" />
         <arg name="linear_coef" value="42.0" />
         <arg name="angular_coef" value="8.0" />
         <arg name="encoder_ticks_per_rev" value="996" />
