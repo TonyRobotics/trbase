@@ -86,3 +86,23 @@ $ roslaunch xiaobai_navigation mapping.launch
 $ roslaunch xiaobai_navigation navigation.launch
 ```
 
+### usb camera
+
+To open the usb camera on the robot,:
+
+```
+$ roscore
+```
+
+Then open a new terminal:
+
+```
+$ rosrun usb_cam usb_cam_node _video_device:='/dev/video0'
+```
+
+On your PC, start image view: 
+
+```
+$ rqt_image_view
+```
+
