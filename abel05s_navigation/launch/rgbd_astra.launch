@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="broadcaster_laser"
+        args="0.26 0 0.55 0 0 0 /base_link /camera_depth_frame 100" />
+  
+    <include file="$(find astra_launch)/launch/astra.launch">
+    </include>
+  
+    <arg name="image" default="/camera/depth/image_raw" />
+    <arg name="scan" default="/scan" />
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+        <remap from="image" to="$(arg image)" />
+        <remap from="scan" to="$(arg scan)" />
+        <param name="range_min" value="0.8" />
+        <param name="range_max" value="3.0" />
+    </node>
+</launch>
