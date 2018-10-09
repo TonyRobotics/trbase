@@ -4,7 +4,7 @@
     <include file="$(find abel10_navigation)/launch/controller.launch" />
 
     <!-- ls01d laser -->
-    <node pkg="tf" type="static_transform_publisher" name="laser_link_broadcaster" args="0.1 0 0.2 0 0 0 base_link laser_link 100" /> 
+    <node pkg="tf" type="static_transform_publisher" name="laser_link_broadcaster" args="0.17 0 0.2 3.14 0 0 base_link laser_link 100" /> 
     <include file="$(find ls01d)/launch/ls01d.launch" />
 
     <!-- mapping -->
