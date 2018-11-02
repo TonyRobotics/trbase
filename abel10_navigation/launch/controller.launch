@@ -9,7 +9,7 @@
         <arg name="linear_coef" value="98.0" />
         <arg name="angular_coef" value="19.5" />
         <arg name="encoder_ticks_per_rev" value="2400" />
-        <arg name="base_width" value="0.39" />
+        <arg name="base_width" value="0.36" />
         <arg name="wheel_diameter" value="0.125" />
     </include>
 </launch>
