@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="broadcaster_us0"
+    args="0.29 0 0.18 0 0 0 /base_link /ultrasound0 100" />
+    <node pkg="tf" type="static_transform_publisher" name="broadcaster_us3"
+    args="-0.1 0.1 0.18 3.14 0 0 /base_link /ultrasound3 100" />
+    <node pkg="tf" type="static_transform_publisher" name="broadcaster_us4"
+    args="-0.1 -0.1 0.18 3.14 0 0 /base_link /ultrasound4 100" />
+  
+    <arg name="port" default="/dev/ultrasound"/>
+    <arg name="baud" default="57600"/>
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
+        <param name="port" value="$(arg port)"/>
+        <param name="baud" value="$(arg baud)"/>
+    </node>
+  
+</launch>
