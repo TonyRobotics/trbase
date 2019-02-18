@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- motor driver -->
+    <include file="$(find abel10s_navigation)/launch/controller.launch" />
+
+    <!-- ultrasound -->
+    <include file="$(find ultrasound)/launch/ultrasound.launch" />
+
+    <!-- ls01d laser -->
+    <node pkg="tf" type="static_transform_publisher" name="laser_link_broadcaster" args="0.2 0 0.2 3.14 0 0 base_link laser_link 100" /> 
+    <include file="$(find ls01d)/launch/ls01d.launch" />
+
+    <!-- mapping -->
+    <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" />
+
+    <!-- move_base -->
+    <include file="$(find abel10s_navigation)/launch/move_base.launch" />
+
+</launch>
