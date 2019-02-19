@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <node pkg="tf" type="static_transform_publisher" name="broadcaster_us0"
-    args="0.29 0 0.18 0 0 0 /base_link /ultrasound0 100" />
+    args="-0.08 -0.07 0 3.14 0 0 /base_link /ultrasound0 100" />
     <node pkg="tf" type="static_transform_publisher" name="broadcaster_us1"
-    args="-0.1 0.1 0.18 3.14 0 0 /base_link /ultrasound1 100" />
+    args="-0.08  0.07 0 3.14 0 0 /base_link /ultrasound1 100" />
     <node pkg="tf" type="static_transform_publisher" name="broadcaster_us2"
-    args="-0.1 -0.1 0.18 3.14 0 0 /base_link /ultrasound2 100" />
+    args="0.3 0 0 0 0 0 /base_link /ultrasound2 100" />
   
     <arg name="port" default="/dev/ultrasound"/>
     <arg name="baud" default="57600"/>
