@@ -110,9 +110,9 @@ class TrdSerial(threading.Thread):
                 self._first_time_flag = False
             self._encoders[0] -= self._encoders_offset[0]
             self._encoders[1] -= self._encoders_offset[1]
-            #print('{} error:{} encoders: {}, {}V {}A {}A. set:{} {}, actual:{} {}'.format(
-            #            time.time(), self._error_code, self._encoders, self._voltage, self._currents[0], self._currents[1],
-            #            ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
+            print('{} error:{} encoders: {}, {}V {}A {}A. set:{} {}, actual:{} {}'.format(
+                        time.time(), self._error_code, self._encoders, self._voltage, self._currents[0], self._currents[1],
+                        ord(msg[7]), ord(msg[8]), ord(msg[9]), ord(msg[10])))
         else:
             print('{} received message: {}'.format(time.time(), msg))
 
@@ -145,12 +145,14 @@ class RosWraperTrd():
     def __init__(self, node_name):
         rospy.init_node(node_name,disable_signals=True)
         self.serialport_name = rospy.get_param('~serialport_name', \
-                                               default='/dev/motor_trd')
+                                               default='/dev/ttyUSB0')
         self.baudrate = rospy.get_param('~baudrate', default=38400)
         self.linear_coef = rospy.get_param('~linear_coef', default=82)
         self.angular_coef = rospy.get_param('~angular_coef', default=14.64)
         self.left_coef = rospy.get_param('~left_coef', default=1)
         self.right_coef = rospy.get_param('~right_coef', default =1)
+        
+	self.car_reverse = rospy.get_param('~car_reverse', default = False)
         self.encoder_ticks_per_rev = rospy.get_param('~encoder_ticks_per_rev', \
                                                      default=1600)
         self.base_width = rospy.get_param('~base_width', default=0.39)
@@ -170,7 +172,7 @@ class RosWraperTrd():
 
         self.trd_serial = TrdSerial(self.serialport_name, self.baudrate)
         self.trd_serial.reset_encoder()
-        #self.trd_serial.reset_base()
+        self.trd_serial.reset_base()
         self.trd_serial.enable_timeout()
 
         self.trd_serial.start()
@@ -193,9 +195,19 @@ class RosWraperTrd():
         v2 = int(v2) if v2<255 else 255
         v1 = int(v1) if v1>0 else 0
         v2 = int(v2) if v2>0 else 0
+
         lock.acquire()
+
+	if self.car_reverse:
+	    v1_tmp = 2*128 - v2
+	    v2_tmp = 2*128 - v1
+
+            v1 = v1_tmp
+            v2 = v2_tmp
+
         self.vel1 = v1
         self.vel2 = v2
+
         lock.release()
         self.vel_latest_time = time.time()
 
@@ -208,6 +220,7 @@ class RosWraperTrd():
             self.vel2 = 128
             lock.release()
         self.trd_serial.set_speed(self.vel1, self.vel2)
+
         #get encoders
         (encoder1, encoder2) = self.trd_serial.get_encoders()
         time_current = rospy.Time.now()
@@ -217,8 +230,17 @@ class RosWraperTrd():
                 (encoder1 - self.encoder1_prev) / self.encoder_ticks_per_rev
         dright = self.right_coef * math.pi * self.wheel_diameter * \
                 (encoder2 - self.encoder2_prev) / self.encoder_ticks_per_rev
+
         self.encoder1_prev = encoder1
         self.encoder2_prev = encoder2
+
+	if self.car_reverse:
+	    left_temp = dleft
+	    right_temp = dright
+
+	    dleft = -1* right_temp
+	    dright = -1* left_temp 
+
         d = (dleft + dright) / 2
         dtheta = (dright - dleft) / self.base_width
         if d != 0:

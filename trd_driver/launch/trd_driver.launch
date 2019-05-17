@@ -10,6 +10,7 @@
   <arg name="encoder_ticks_per_rev" default="3300" />
   <arg name="base_width" default="0.25" />
   <arg name="wheel_diameter" default="0.08" />
+  <arg name="car_reverse" default="false" />
 
   <!-- TR10 -->
   <!--
@@ -51,6 +52,7 @@
     <param name="encoder_ticks_per_rev" value="$(arg encoder_ticks_per_rev)" />
     <param name="base_width" value="$(arg base_width)" />
     <param name="wheel_diameter" value="$(arg wheel_diameter)" />
+    <param name="car_reverse" value="$(arg car_reverse)" />
   </node>
 </launch>
 
